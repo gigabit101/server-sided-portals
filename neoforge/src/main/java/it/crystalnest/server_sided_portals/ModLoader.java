@@ -1,4 +1,4 @@
-package it.crystalnest.cobweb_mod_template;
+package it.crystalnest.server_sided_portals;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;

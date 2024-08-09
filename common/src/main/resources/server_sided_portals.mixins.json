@@ -4,11 +4,15 @@
   "package": "${group}.${mod_id}.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_${java_version}",
-  "mixins": [],
+  "mixins": [
+    "BaseFireBlockMixin",
+    "NetherPortalBlockMixin",
+    "PortalForcerMixin",
+    "PortalShapeMixin"
+  ],
   "client": [],
   "server": [],
   "injectors": {
     "defaultRequire": 1
   }
 }
-

@@ -1,6 +1,5 @@
-package it.crystalnest.cobweb_mod_template;
+package it.crystalnest.server_sided_portals;
 
-import it.crystalnest.cobweb_mod_template.config.ModConfig;
 import org.jetbrains.annotations.ApiStatus;
 
 /**
@@ -13,7 +12,5 @@ public final class CommonModLoader {
   /**
    * Initialize common operations across loaders.
    */
-  public static void init() {
-    ModConfig.CONFIG.register();
-  }
+  public static void init() {}
 }

@@ -1,7 +1,7 @@
-package it.crystalnest.cobweb_mod_template.platform;
+package it.crystalnest.server_sided_portals.platform;
 
-import it.crystalnest.cobweb_mod_template.Constants;
-import it.crystalnest.cobweb_mod_template.platform.services.PlatformHelper;
+import it.crystalnest.server_sided_portals.Constants;
+import it.crystalnest.server_sided_portals.platform.services.PlatformHelper;
 
 import java.util.ServiceLoader;
 
