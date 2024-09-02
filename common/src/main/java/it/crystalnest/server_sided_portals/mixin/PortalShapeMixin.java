@@ -132,14 +132,14 @@ public abstract class PortalShapeMixin implements CustomPortalChecker {
         height = 1;
       } else if (!isValid() && (serverLevel.dimension() == Level.OVERWORLD || CustomPortalChecker.isCustomDimension(serverLevel))) {
         // If it's not a Nether Portal, and we are either in the Overworld or in a Custom Dimension, check if it's a Custom Portal.
-        for (ResourceKey<Level> dimension : CustomPortalChecker.getCustomDimensions(serverLevel)) {
-          TagKey<Block> frameBlock = CustomPortalChecker.getCustomPortalFrameBlockTag(dimension);
+        for (ResourceKey<Level> dim : CustomPortalChecker.getCustomDimensions(serverLevel)) {
+          TagKey<Block> frameBlock = CustomPortalChecker.getCustomPortalFrameBlockTag(dim);
           bottomLeft = calculateBottomLeftForCustomDimension(pos, frameBlock);
           if (bottomLeft != null) {
             setWidth(calculateWidthForCustomDimension(frameBlock));
             if (width > 0) {
               height = calculateHeightForCustomDimension(frameBlock);
-              this.dimension = dimension;
+              this.dimension = dim;
               // The first Custom Dimension to match breaks the loop and validates the Custom Portal.
               break;
             }
@@ -204,8 +204,7 @@ public abstract class PortalShapeMixin implements CustomPortalChecker {
         }
         break;
       }
-      BlockState stateBelow = this.level.getBlockState(mutablePos.move(Direction.DOWN));
-      if (!stateBelow.is(frameBlock)) {
+      if (!this.level.getBlockState(mutablePos.move(Direction.DOWN)).is(frameBlock)) {
         break;
       }
     }
