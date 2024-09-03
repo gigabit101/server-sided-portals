@@ -9,9 +9,10 @@ and this project adheres to [Crystal Nest Semantic Versioning](https://crystalne
 
 - Nothing new.
 
-## [v1.0.0] - yyyy/mm/dd
+## [v1.0.0] - 2024/09/08
 
-- Release notes...
+- Added custom dimension travel with custom portals.
+- Exposed utility API.
 
 [Unreleased]: https://github.com/crystal-nest/server-sided-portals
 [README]: https://github.com/crystal-nest/server-sided-portals#readme
