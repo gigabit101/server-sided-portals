@@ -53,6 +53,15 @@ You can check out a working example [here](https://github.com/Crystal-Nest/night
 
 There are also a few useful utility methods available, for which you can check out the Javadoc for more details.
 
+## **Compatibilities**
+
+| Mod                                                            | Loader |                                                         Compatibility                                                          |
+|:---------------------------------------------------------------|:------:|:------------------------------------------------------------------------------------------------------------------------------:|
+| [Crying Portals](https://modrinth.com/mod/crying-portals)      |  All   |                                                          Incompatible                                                          |
+| [Immersive Portals](https://modrinth.com/mod/immersiveportals) |  All   |                                                          Incompatible                                                          |
+| [Very Many Players](https://modrinth.com/mod/vmp-fabric)       | Fabric |                                           Compatible with `use_async_portals=false`                                            |
+| [Canary](https://modrinth.com/mod/canary)                      | Forge  | Compatible with [fast portals](https://github.com/AbdElAziz333/Canary/wiki/Configuration-File#mixinaipoifast_portals) disabled |
+
 ## **License and right of use**
 
 Feel free to use this mod for any modpack or video, just be sure to give credit and possibly link [here](https://github.com/crystal-nest/server-sided-portals#readme).  
