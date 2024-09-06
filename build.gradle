@@ -72,10 +72,6 @@ subprojects { subproject ->
       name = "Crystal Nest"
       url = "https://maven.crystalnest.it"
     }
-    maven {
-      name = "Fuzs Mod Resources"
-      url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
-    }
   }
 
   tasks.withType(JavaCompile).configureEach {
@@ -103,7 +99,6 @@ subprojects { subproject ->
       "forge_version"                : forge_version,
       "forge_loader_version_range"   : forge_loader_version_range,
       "cobweb_version"               : cobweb_version,
-      "fcap_version"                 : fcap_version,
     ]
 
     filesMatching(["pack.mcmeta", "fabric.mod.json", "META-INF/mods.toml", "*.mixins.json"]) {
@@ -209,7 +204,6 @@ subprojects { subproject ->
       switch (loader) {
         case "Fabric":
           required "fabric-api"
-          required "forge-config-api-port"
           break
         case "Forge":
           break
@@ -220,7 +214,6 @@ subprojects { subproject ->
       switch (loader) {
         case "Fabric":
           required "fabric-api"
-          required "forge-config-api-port-fabric"
           break
         case "Forge":
           break

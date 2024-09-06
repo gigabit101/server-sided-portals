@@ -1,52 +1,71 @@
-![Cobweb Mod Template banner](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/cobweb-mod-template/banner.png "Cobweb Mod Template banner")
+![Server Sided Portals banner](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/server-sided-portals/banner.png "Server Sided Portals banner")
 
 ---
 
-![Minecraft](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/minecraft.svg "Minecraft")[![1.19.4](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/1-19-4.svg "1.19.4")](https://modrinth.com/mod/cobweb-mod-template/versions?g=1.19.4)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![1.19.2](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/1-19-2.svg "1.19.2")](https://modrinth.com/mod/cobweb-mod-template/versions?g=1.19.2)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![1.18.2](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/1-18-2.svg "1.18.2")](https://modrinth.com/mod/cobweb-mod-template/versions?g=1.18.2)
+![Minecraft](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/minecraft.svg "Minecraft")[![1.20.4](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/1-20-4.svg "1.20.4")](https://modrinth.com/mod/server-sided-portals/versions?g=1.20.4)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![1.20.2](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/1-20-2.svg "1.20.2")](https://modrinth.com/mod/server-sided-portals/versions?g=1.20.2)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![1.20.1](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/1-20-1.svg "1.20.1")](https://modrinth.com/mod/server-sided-portals/versions?g=1.20.1)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![1.19.4](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/1-19-4.svg "1.19.4")](https://modrinth.com/mod/server-sided-portals/versions?g=1.19.4)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![1.19.2](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/minecraft/1-19-2.svg "1.19.2")](https://modrinth.com/mod/server-sided-portals/versions?g=1.19.2)
 
-![Loader](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/loader.svg "Loader")[![Forge](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/forge.svg "Forge")](https://modrinth.com/mod/cobweb-mod-template/versions?l=forge)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![Fabric](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/fabric.svg "Fabric")](https://modrinth.com/mod/cobweb-mod-template/versions?l=fabric)
+![Loader](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/loader.svg "Loader")[![NeoForge](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/neoforge.svg "NeoForge")](https://modrinth.com/mod/server-sided-portals/versions?l=neoforge)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![Forge](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/forge.svg "Forge")](https://modrinth.com/mod/server-sided-portals/versions?l=forge)![Separator](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/separator.svg)[![Fabric](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/loader/fabric.svg "Fabric")](https://modrinth.com/mod/server-sided-portals/versions?l=fabric)
 
-![Overlay](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/side/client-server.svg)
+![Overlay](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/side/server.svg)
 
-![Issues](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/github/issues.svg "Issues")[![GitHub](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/github/github.svg "GitHub")](https://github.com/crystal-nest/cobweb-mod-template/issues)
+![Issues](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/github/issues.svg "Issues")[![GitHub](https://raw.githubusercontent.com/crystal-nest/mod-fancy-assets/main/github/github.svg "GitHub")](https://github.com/crystal-nest/server-sided-portals/issues)
 
 ---
 
 ## **Description**
 
-Multiloader skeleton for Minecraft mods!  
-Built on [Jared's MultiLoaderTemplate](https://github.com/jaredlll08/MultiLoader-Template), with the addition of:
+This is a mod API that provides easily customizable and server-sided portals to any custom dimension.  
+This mod is required server side only, and is thus compatible with any client, Vanilla included.  
+This mod can be used as a dependency for another mod/datapack, or bundled in a modpack with a custom datapack or with mods that require it.
 
-- Tasks to publish on Maven, GitHub, Modrinth, and CurseForge.
-- [Cobweb](https://modrinth.com/mod/cobweb) API dependency.
-- A little bit more Javadoc.
-- Code style changes.
+Check out the usage details below!
 
-***Note: the intended use of this template is to create a repository from it, and then update each branch with the content built by our [official generator](https://crystalnest.it/#/generator).***
+## **Features**
 
-## **Setup completion**
+- Allows the creation of portals with a custom frame that are linked for a specific dimension.
+- Choose the frame blocks simply with a block tag! Multiple blocks are allowed!
+- Required only server side!
+- Fully compatible with both modded and Vanilla clients.
+- Easy to use with either a mod or a datapack.
 
-To complete the setup:
+## **Usage**
 
-- Change the [Support us](#support-us) section and the banner link.
-- Add your project CurseForge ID in the `gradle.properties`.
-- Check out the configuration example.
-- Update the changelog with proper release notes.
-- Run the task `common > Tasks > vanilla gradle > decompile`
-- Run the task `forge > Tasks > forgegradle runs > genIntellijRuns`
+### Datapack
 
-## Removing Platforms and Loaders
+It's very easy to make use of this mod API with a custom datapack:
 
-While this template includes support for Fabric and Forge, you can easily remove support for the ones you don't need.  
-This can be done by deleting the subproject folder and then removing it from the associated `include` in the `settings.gradle` file, along with deleting the related gradle properties.
+1. Create a datapack following [this tutorial](https://minecraft.wiki/w/Tutorials/Creating_a_data_pack).
+2. Create a custom dimension type with [this generator](https://misode.github.io/dimension-type/).
+3. Create a custom dimension with [this generator](https://misode.github.io/dimension/).
+4. Create a custom block tag for the portal frame. You can add multiple blocks and other block tags too!
+5. Make sure all the JSON files you created in the previous steps are called the exact same.
 
-The same thing applies for the different publishing platforms, Maven, GitHub, Modrinth, and CurseForge.  
-To remove support for the ones you don't need just remove the section and properties regarding them.
+That's it! When the datapack is loaded along with this mod, all dimensions will be loaded, and it'll be possible to create portals with the specified frame blocks!  
+You can also add multiple dimensions, each with its custom portal definition: just make sure that, for each one, the dimension files and the block tag file are called the same.
+
+### Mod
+
+Making a mod that leverages this API is simple.  
+Follow the instructions in the datapack section above, but put the files under `resources/data/mod_id/`.
+
+Making a mod rather than a datapack might be useful for adding extra functionality regarding your dimension.  
+You can check out a working example [here](https://github.com/Crystal-Nest/nightworld).
+
+There are also a few useful utility methods available, for which you can check out the Javadoc for more details.
+
+## **Compatibilities**
+
+| Mod                                                            | Loader |                                                         Compatibility                                                          |
+|:---------------------------------------------------------------|:------:|:------------------------------------------------------------------------------------------------------------------------------:|
+| [Crying Portals](https://modrinth.com/mod/crying-portals)      |  All   |                                                          Incompatible                                                          |
+| [Immersive Portals](https://modrinth.com/mod/immersiveportals) |  All   |                                                          Incompatible                                                          |
+| [Very Many Players](https://modrinth.com/mod/vmp-fabric)       | Fabric |                                           Compatible with `use_async_portals=false`                                            |
+| [Canary](https://modrinth.com/mod/canary)                      | Forge  | Compatible with [fast portals](https://github.com/AbdElAziz333/Canary/wiki/Configuration-File#mixinaipoifast_portals) disabled |
 
 ## **License and right of use**
 
-Feel free to use this mod template for any mod, just be sure to give credit and possibly link [here](https://github.com/crystal-nest/cobweb-mod-template#readme).  
-This project is published under the [GNU General Public License v3.0](https://github.com/crystal-nest/cobweb-mod-template/blob/master/LICENSE).
+Feel free to use this mod for any modpack or video, just be sure to give credit and possibly link [here](https://github.com/crystal-nest/server-sided-portals#readme).  
+This project is published under the [GNU General Public License v3.0](https://github.com/crystal-nest/server-sided-portals/blob/master/LICENSE).
 
 ## **Support us**
 
