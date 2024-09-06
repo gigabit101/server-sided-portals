@@ -1,4 +1,4 @@
-package it.crystalnest.cobweb_mod_template;
+package it.crystalnest.server_sided_portals;
 
 import net.fabricmc.api.ModInitializer;
 import org.jetbrains.annotations.ApiStatus;
