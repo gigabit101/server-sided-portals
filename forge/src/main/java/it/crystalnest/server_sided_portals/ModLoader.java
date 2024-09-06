@@ -1,7 +1,6 @@
-package it.crystalnest.cobweb_mod_template;
+package it.crystalnest.server_sided_portals;
 
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.ApiStatus;
 
 /**
@@ -12,10 +11,8 @@ import org.jetbrains.annotations.ApiStatus;
 public final class ModLoader {
   /**
    * Mod initialization.
-   *
-   * @param bus Event bus.
    */
-  public ModLoader(IEventBus bus) {
+  public ModLoader() {
     CommonModLoader.init();
   }
 }
