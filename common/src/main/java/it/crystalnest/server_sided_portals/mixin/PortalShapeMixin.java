@@ -195,8 +195,7 @@ public abstract class PortalShapeMixin implements CustomPortalChecker {
   private int getDistanceUntilEdgeAboveFrameForCustomDimension(TagKey<Block> frameBlock, BlockPos pos, Direction direction) {
     BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
     for (int i = 0; i <= 21; i++) {
-      mutablePos.set(pos).move(direction, i);
-      BlockState state = this.level.getBlockState(mutablePos);
+      BlockState state = this.level.getBlockState(mutablePos.set(pos).move(direction, i));
       if (!isEmpty(state)) {
         if (state.is(frameBlock)) {
           return i;
