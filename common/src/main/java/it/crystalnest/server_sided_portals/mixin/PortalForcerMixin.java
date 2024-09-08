@@ -41,7 +41,11 @@ public abstract class PortalForcerMixin {
    */
   @Unique
   private BlockState getCorrectBlockState(ServerLevel level, BlockState state) {
-    return state.is(Blocks.OBSIDIAN) ? CustomPortalChecker.getCustomPortalFrameBlock(level).defaultBlockState() : state;
+    if (state.is(Blocks.OBSIDIAN)) {
+      ResourceKey<Level> origin = Constants.DIMENSION_ORIGIN_THREAD.get();
+      return CustomPortalChecker.getCustomPortalFrameBlock(CustomPortalChecker.isCustomDimension(origin) ? Objects.requireNonNull(level.getServer().getLevel(origin)) : level).defaultBlockState();
+    }
+    return state;
   }
 
   /**
