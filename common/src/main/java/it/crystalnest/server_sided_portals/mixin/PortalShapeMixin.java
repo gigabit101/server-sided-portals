@@ -125,7 +125,6 @@ public abstract class PortalShapeMixin implements CustomPortalChecker {
     if (!level.isClientSide()) {
       ServerLevel serverLevel = (ServerLevel) level;
       if (this.isValid() && CustomPortalChecker.isCustomDimension(serverLevel)) {
-        Constants.LOGGER.error("{}, {}, {}", this.isValid(), CustomPortalChecker.isCustomDimension(serverLevel), serverLevel.dimension().location());
         // If it's a Nether Portal, and we are in a Custom Dimension, prevent creating the portal.
         this.bottomLeft = null;
         this.setWidth(1);
