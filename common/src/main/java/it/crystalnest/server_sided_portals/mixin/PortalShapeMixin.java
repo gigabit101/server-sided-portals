@@ -165,7 +165,7 @@ public abstract class PortalShapeMixin implements CustomPortalChecker {
   @Nullable
   @SuppressWarnings({"ConstantValue", "StatementWithEmptyBody"})
   private BlockPos calculateBottomLeftForCustomDimension(BlockPos pos, TagKey<Block> frameBlock) {
-    for (int i = Math.max(level.getMinBuildHeight(), pos.getY() - 21); pos.getY() > i && isEmpty(level.getBlockState(pos.below())); pos = pos.below()) ;
+    for (int i = Math.max(level.getMinBuildHeight(), pos.getY() - 21); pos.getY() > i && isEmpty(level.getBlockState(pos.below())); pos = pos.below());
     Direction direction = rightDir.getOpposite();
     int j = getDistanceUntilEdgeAboveFrameForCustomDimension(frameBlock, pos, direction) - 1;
     return j < 0 ? null : pos.relative(direction, j);
