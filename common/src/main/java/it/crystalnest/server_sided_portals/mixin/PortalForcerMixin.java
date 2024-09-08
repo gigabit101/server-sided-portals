@@ -79,7 +79,7 @@ public abstract class PortalForcerMixin {
 
   /**
    * Redirects the call to {@link Stream#filter(Predicate)} inside the method {@link PortalForcer#findClosestPortalPosition(BlockPos, boolean, WorldBorder)}.<br />
-   * Adds a new condition to the predicate to prevent teleporting from Nether Portals to Nightworld Portals and vice versa.
+   * Adds a new condition to the predicate to prevent teleporting from Nether Portals to custom portals and vice versa.
    *
    * @param instance stream of {@link BlockPos}s owning the redirected method.
    * @param predicate whether the portal is within bounds.
