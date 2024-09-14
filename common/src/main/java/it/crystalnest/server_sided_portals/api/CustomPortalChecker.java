@@ -5,8 +5,7 @@ import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -100,7 +99,7 @@ public interface CustomPortalChecker {
    * @return Block Tag for the Custom Portal frame.
    */
   static TagKey<Block> getCustomPortalFrameBlockTag(ResourceKey<Level> dimension) {
-    return TagKey.create(Registries.BLOCK, dimension.location());
+    return TagKey.create(Registry.BLOCK_REGISTRY, dimension.location());
   }
 
   /**
@@ -110,7 +109,7 @@ public interface CustomPortalChecker {
    * @return a random Block for the Custom Portal frame.
    */
   static Block getCustomPortalFrameBlock(Level level) {
-    return BuiltInRegistries.BLOCK.getTag(getCustomPortalFrameBlockTag(level.dimension())).map(holders -> holders.getRandomElement(level.getRandom()).orElse(Holder.direct(Blocks.OBSIDIAN)).value()).orElse(Blocks.OBSIDIAN);
+    return Registry.BLOCK.getTag(getCustomPortalFrameBlockTag(level.dimension())).map(holders -> holders.getRandomElement(level.getRandom()).orElse(Holder.direct(Blocks.OBSIDIAN)).value()).orElse(Blocks.OBSIDIAN);
   }
 
   /**
@@ -149,7 +148,7 @@ public interface CustomPortalChecker {
         axis = Axis.X;
         vec3d = new Vec3(0.5, 0.0, 0.0);
       }
-      return PortalShape.createPortalInfo(destination, rect, axis, vec3d, entity, entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
+      return PortalShape.createPortalInfo(destination, rect, axis, vec3d, entity.getDimensions(entity.getPose()), entity.getDeltaMovement(), entity.getYRot(), entity.getXRot());
     }).orElse(null);
   }
 
