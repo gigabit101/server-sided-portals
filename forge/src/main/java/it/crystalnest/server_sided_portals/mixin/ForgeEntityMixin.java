@@ -20,15 +20,13 @@ import java.util.Objects;
 @Mixin(Entity.class)
 public abstract class ForgeEntityMixin implements EntityPortal {
   /**
-   * Shadowed {@link Entity#level()}.
-   *
-   * @return level.
+   * Shadowed {@link Entity#level}.
    */
   @Shadow
-  public abstract Level level();
+  public Level level;
 
   /**
-   * Redirects the call to {@link Entity#level()} inside the method {@link Entity#handleNetherPortal()}.<br />
+   * Redirects the call to {@link Entity#level} inside the method {@link Entity#handleNetherPortal()}.<br />
    * Optionally changes the destination dimension.
    *
    * @param instance {@link MinecraftServer} owning the redirected method.
@@ -37,6 +35,6 @@ public abstract class ForgeEntityMixin implements EntityPortal {
    */
   @Redirect(method = "handleNetherPortal", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;getLevel(Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/server/level/ServerLevel;"))
   private ServerLevel redirectGetLevel(MinecraftServer instance, ResourceKey<Level> worldKey) {
-    return CustomPortalChecker.getPortalDestination((ServerLevel) level(), Objects.requireNonNull(instance.getLevel(worldKey)), portalEntrancePos());
+    return CustomPortalChecker.getPortalDestination((ServerLevel) level, Objects.requireNonNull(instance.getLevel(worldKey)), portalEntrancePos());
   }
 }
