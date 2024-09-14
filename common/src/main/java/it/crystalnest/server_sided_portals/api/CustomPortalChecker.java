@@ -140,10 +140,10 @@ public interface CustomPortalChecker {
     return ((EntityPortal) entity).exitPortal(destination, entity.blockPosition(), false, destination.getWorldBorder()).map(rect -> {
       Vec3 vec3d;
       Axis axis;
-      BlockState blockState = entity.level().getBlockState(((EntityPortal) entity).portalEntrancePos());
+      BlockState blockState = entity.level.getBlockState(((EntityPortal) entity).portalEntrancePos());
       if (blockState.hasProperty(BlockStateProperties.HORIZONTAL_AXIS)) {
         axis = blockState.getValue(BlockStateProperties.HORIZONTAL_AXIS);
-        BlockUtil.FoundRectangle rectangle = BlockUtil.getLargestRectangleAround(((EntityPortal) entity).portalEntrancePos(), axis, PortalShape.MAX_WIDTH, Axis.Y, PortalShape.MAX_HEIGHT, pos -> entity.level().getBlockState(pos) == blockState);
+        BlockUtil.FoundRectangle rectangle = BlockUtil.getLargestRectangleAround(((EntityPortal) entity).portalEntrancePos(), axis, PortalShape.MAX_WIDTH, Axis.Y, PortalShape.MAX_HEIGHT, pos -> entity.level.getBlockState(pos) == blockState);
         vec3d = ((EntityPortal) entity).relativePortalPosition(axis, rectangle);
       } else {
         axis = Axis.X;
