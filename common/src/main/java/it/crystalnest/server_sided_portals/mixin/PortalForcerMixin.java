@@ -4,6 +4,7 @@ import it.crystalnest.server_sided_portals.Constants;
 import it.crystalnest.server_sided_portals.api.CustomPortalChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -17,6 +18,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
