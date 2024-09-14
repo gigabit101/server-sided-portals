@@ -9,7 +9,7 @@ and this project adheres to [Crystal Nest Semantic Versioning](https://crystalne
 
 - Nothing new.
 
-## [v1.0.0] - 2024/09/08
+## [v1.0.0] - 2024/09/14
 
 - Added custom dimension travel with custom portals.
 - Exposed utility API.
