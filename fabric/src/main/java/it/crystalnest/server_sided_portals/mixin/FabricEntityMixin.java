@@ -21,18 +21,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
 public abstract class FabricEntityMixin {
   /**
+   * Shadowed {@link Entity#level}.
+   */
+  @Shadow
+  public Level level;
+
+  /**
    * Shadowed {@link Entity#portalEntrancePos}.
    */
   @Shadow
   protected BlockPos portalEntrancePos;
-
-  /**
-   * Shadowed {@link Entity#level}.
-   *
-   * @return level.
-   */
-  @Shadow
-  public abstract Level level();
 
   /**
    * Shadowed {@link Entity#isRemoved()}.
@@ -61,8 +59,8 @@ public abstract class FabricEntityMixin {
    */
   @Redirect(method = "handleNetherPortal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;changeDimension(Lnet/minecraft/server/level/ServerLevel;)Lnet/minecraft/world/entity/Entity;"))
   private Entity redirectChangeDimension(Entity instance, ServerLevel destination) {
-    ServerLevel actualDestination = CustomPortalChecker.getPortalDestination((ServerLevel) level(), destination, portalEntrancePos);
-    if (!level().isClientSide && !this.isRemoved() && CustomPortalChecker.isCustomPortal(level(), portalEntrancePos)) {
+    ServerLevel actualDestination = CustomPortalChecker.getPortalDestination((ServerLevel) level, destination, portalEntrancePos);
+    if (!level.isClientSide && !this.isRemoved() && CustomPortalChecker.isCustomPortal(level, portalEntrancePos)) {
       //noinspection UnstableApiUsage
       ((Teleportable) this).fabric_setCustomTeleportTarget(CustomPortalChecker.getCustomPortalInfo(instance, actualDestination));
     }
