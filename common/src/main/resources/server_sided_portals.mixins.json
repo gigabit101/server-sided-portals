@@ -10,7 +10,8 @@
     "EntityMixin",
     "NetherPortalBlockMixin",
     "PortalForcerMixin",
-    "PortalShapeMixin"],
+    "PortalShapeMixin"
+  ],
   "client": [],
   "server": [],
   "injectors": {
