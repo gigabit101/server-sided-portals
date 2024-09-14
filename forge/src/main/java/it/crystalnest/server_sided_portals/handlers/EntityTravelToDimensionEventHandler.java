@@ -1,5 +1,6 @@
 package it.crystalnest.server_sided_portals.handlers;
 
+import it.crystalnest.server_sided_portals.Constants;
 import it.crystalnest.server_sided_portals.api.CustomPortalChecker;
 import it.crystalnest.server_sided_portals.api.Teleportable;
 import net.minecraft.server.MinecraftServer;
@@ -14,7 +15,7 @@ import java.util.Objects;
 /**
  * {@link EntityTravelToDimensionEvent} handler.
  */
-@EventBusSubscriber(bus = Bus.FORGE)
+@EventBusSubscriber(modid = Constants.MOD_ID, bus = Bus.FORGE)
 public final class EntityTravelToDimensionEventHandler {
   private EntityTravelToDimensionEventHandler() {}
 
