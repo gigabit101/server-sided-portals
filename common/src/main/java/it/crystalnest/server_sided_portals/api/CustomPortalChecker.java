@@ -8,6 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -50,6 +51,19 @@ public interface CustomPortalChecker {
    */
   static boolean isPortalForDimension(Level level, BlockPos pos, ResourceKey<Level> dimension) {
     return getPortalDimension(level, pos) == dimension;
+  }
+
+  /**
+   * Checks whether the Portal at the given position is for the specified dimension.
+   *
+   * @param level current dimension.
+   * @param pos position.
+   * @param dimension name of the target dimension.
+   * @return whether the Portal at the given position is for the specified dimension.
+   */
+  static boolean isPortalForDimension(Level level, BlockPos pos, String dimension) {
+    ResourceLocation dimensionKey = getPortalDimension(level, pos).location();
+    return dimensionKey.getNamespace().equals(Constants.MOD_ID) && dimensionKey.getPath().equalsIgnoreCase(dimension);
   }
 
   /**
