@@ -9,6 +9,11 @@ and this project adheres to [Crystal Nest Semantic Versioning](https://crystalne
 
 - Nothing new.
 
+## [v1.1.0] - 2024/09/15
+
+- Added new utility method overload `isPortalForDimension(Level, BlockPos, String)`.
+- 1.20.1 only, fixed NeoForge build.
+
 ## [v1.0.0] - 2024/09/14
 
 - Added custom dimension travel with custom portals.
@@ -17,4 +22,5 @@ and this project adheres to [Crystal Nest Semantic Versioning](https://crystalne
 [Unreleased]: https://github.com/crystal-nest/server-sided-portals
 [README]: https://github.com/crystal-nest/server-sided-portals#readme
 
+[v1.1.0]: https://github.com/crystal-nest/server-sided-portals/releases?q=1.1.0
 [v1.0.0]: https://github.com/crystal-nest/server-sided-portals/releases?q=1.0.0
