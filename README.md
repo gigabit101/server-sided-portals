@@ -18,7 +18,7 @@ This is a mod API that provides easily customizable and server-sided portals to 
 This mod is required server side only, and is thus compatible with any client, Vanilla included.  
 This mod can be used as a dependency for another mod/datapack, or bundled in a modpack with a custom datapack or with mods that require it.
 
-Check out the usage details below!
+Check out the usage details below or on the [Wiki](https://github.com/Crystal-Nest/server-sided-portals/wiki)!
 
 ## **Features**
 
