@@ -62,6 +62,12 @@ There are also a few useful utility methods available, for which you can check o
 | [Very Many Players](https://modrinth.com/mod/vmp-fabric)       | Fabric |                                           Compatible with `use_async_portals=false`                                            |
 | [Canary](https://modrinth.com/mod/canary)                      | Forge  | Compatible with [fast portals](https://github.com/AbdElAziz333/Canary/wiki/Configuration-File#mixinaipoifast_portals) disabled |
 
+## **Dependencies**
+
+| Mod                                       | Loader | Requirement |
+|:------------------------------------------|:------:|:-----------:|
+| [Cobweb](https://modrinth.com/mod/cobweb) |  All   |  Required   |
+
 ## **License and right of use**
 
 Feel free to use this mod for any modpack or video, just be sure to give credit and possibly link [here](https://github.com/crystal-nest/server-sided-portals#readme).  
