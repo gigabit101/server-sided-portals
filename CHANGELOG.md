@@ -9,6 +9,10 @@ and this project adheres to [Crystal Nest Semantic Versioning](https://crystalne
 
 - Nothing new.
 
+## [v1.1.1] - 2024/09/30
+
+- Added support for 1.21.1.
+
 ## [v1.1.0] - 2024/09/15
 
 - Added new utility method overload `isPortalForDimension(Level, BlockPos, String)`.
@@ -22,5 +26,6 @@ and this project adheres to [Crystal Nest Semantic Versioning](https://crystalne
 [Unreleased]: https://github.com/crystal-nest/server-sided-portals
 [README]: https://github.com/crystal-nest/server-sided-portals#readme
 
+[v1.1.1]: https://github.com/crystal-nest/server-sided-portals/releases?q=1.1.1
 [v1.1.0]: https://github.com/crystal-nest/server-sided-portals/releases?q=1.1.0
 [v1.0.0]: https://github.com/crystal-nest/server-sided-portals/releases?q=1.0.0
