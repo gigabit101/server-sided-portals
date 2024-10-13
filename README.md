@@ -30,6 +30,8 @@ Check out the usage details below or on the [Wiki](https://github.com/Crystal-Ne
 
 ## **Usage**
 
+You can find up-to-date examples for both a datapack and a mod on the [Wiki](https://github.com/Crystal-Nest/server-sided-portals/wiki/Working-examples).
+
 ### Datapack
 
 It's very easy to make use of this mod API with a custom datapack:
@@ -46,10 +48,8 @@ You can also add multiple dimensions, each with its custom portal definition: ju
 ### Mod
 
 Making a mod that leverages this API is simple.  
-Follow the instructions in the datapack section above, but put the files under `resources/data/mod_id/`.
-
-Making a mod rather than a datapack might be useful for adding extra functionality regarding your dimension.  
-You can check out a working example [here](https://github.com/Crystal-Nest/nightworld).
+Follow the instructions in the datapack section above, but put the files under `resources/data/mod_id/`.  
+Making a mod rather than a datapack might be useful for adding extra functionality regarding your dimension.
 
 There are also a few useful utility methods available, for which you can check out the Javadoc for more details.
 
