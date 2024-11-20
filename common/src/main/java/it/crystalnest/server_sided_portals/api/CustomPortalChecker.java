@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.portal.PortalShape;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Handles checking whether a portal frame is for a Custom Portal.
@@ -30,7 +31,9 @@ public interface CustomPortalChecker {
    * @return portal related dimension.
    */
   static ResourceKey<Level> getPortalDimension(Level level, BlockPos pos) {
-    return ((CustomPortalChecker) new PortalShape(level, pos, level.getBlockState(pos).getOptionalValue(NetherPortalBlock.AXIS).orElse(Axis.X))).dimension();
+    Optional<PortalShape> op = PortalShape.findEmptyPortalShape(level, pos, level.getBlockState(pos).getOptionalValue(NetherPortalBlock.AXIS).orElse(Axis.X));
+    PortalShape shape = op.orElse(null);
+    return ((CustomPortalChecker) shape).dimension();
   }
 
   /**
@@ -116,7 +119,7 @@ public interface CustomPortalChecker {
    * @return a random Block for the Custom Portal frame.
    */
   static Block getCustomPortalFrameBlock(Level level) {
-    return BuiltInRegistries.BLOCK.getTag(getCustomPortalFrameBlockTag(level.dimension())).map(holders -> holders.getRandomElement(level.getRandom()).orElse(Holder.direct(Blocks.OBSIDIAN)).value()).orElse(Blocks.OBSIDIAN);
+    return BuiltInRegistries.BLOCK.get(getCustomPortalFrameBlockTag(level.dimension())).map(holders -> holders.getRandomElement(level.getRandom()).orElse(Holder.direct(Blocks.OBSIDIAN)).value()).orElse(Blocks.OBSIDIAN);
   }
 
   /**

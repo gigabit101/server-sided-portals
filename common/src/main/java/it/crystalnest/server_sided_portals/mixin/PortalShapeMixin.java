@@ -1,6 +1,5 @@
 package it.crystalnest.server_sided_portals.mixin;
 
-import it.crystalnest.server_sided_portals.Constants;
 import it.crystalnest.server_sided_portals.api.CustomPortalChecker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,6 +7,7 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -32,76 +32,35 @@ import java.util.Objects;
  */
 @Mixin(PortalShape.class)
 public abstract class PortalShapeMixin implements CustomPortalChecker {
-  /**
-   * Shadowed {@link PortalShape#level}.
-   */
-  @Final
-  @Shadow
-  private LevelAccessor level;
-
-  /**
-   * Shadowed {@link PortalShape#rightDir}.
-   */
   @Final
   @Shadow
   private Direction rightDir;
 
-  /**
-   * Shadowed {@link PortalShape#numPortalBlocks}.
-   */
   @Shadow
   private int numPortalBlocks;
 
-  /**
-   * Shadowed {@link PortalShape#bottomLeft}.
-   */
   @Shadow
   @Nullable
   private BlockPos bottomLeft;
 
-  /**
-   * Shadowed {@link PortalShape#width}.
-   */
   @Final
   @Shadow
   private int width;
 
-  /**
-   * Shadowed {@link PortalShape#height}.
-   */
   @Shadow
   private int height;
 
-  /**
-   * Related Custom Dimension.<br/>
-   * Defaults to the {@link Level#NETHER Nether}.
-   */
   @Unique
   private ResourceKey<Level> dimension = Level.NETHER;
 
-  /**
-   * Shadowed {@link PortalShape#isEmpty(BlockState)}.
-   *
-   * @return whether the state is valid.
-   */
   @Shadow
   private static boolean isEmpty(BlockState state) {
     throw new UnsupportedOperationException("Tried to call a dummy body of a shadowed method: PortalShape#isEmpty(BlockState)");
   }
 
-  /**
-   * Shadowed {@link PortalShape#isValid()}.
-   *
-   * @return whether the portal is valid.
-   */
   @Shadow
   public abstract boolean isValid();
 
-  /**
-   * Accessor to allow changes to {@link PortalShape#width}.
-   *
-   * @param width portal width.
-   */
   @Mutable
   @Accessor("width")
   protected abstract void setWidth(int width);
@@ -111,17 +70,8 @@ public abstract class PortalShapeMixin implements CustomPortalChecker {
     return dimension;
   }
 
-  /**
-   * Injects at the end of the constructor.<br />
-   * Checks if a Custom Portal can be created.
-   *
-   * @param level dimension.
-   * @param pos block position.
-   * @param axis portal alignment (X or Z).
-   * @param ci {@link CallbackInfo}.
-   */
-  @Inject(method = "<init>(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction$Axis;)V", at = @At(value = "TAIL"))
-  private void onInit(LevelAccessor level, BlockPos pos, Axis axis, CallbackInfo ci) {
+  @Inject(method = "<init>", at = @At(value = "TAIL"))
+  private void onInit(Axis p_77697_, int p_374222_, Direction p_374407_, BlockPos p_77696_, int p_374218_, int p_374477_, CallbackInfo ci) {
     if (!level.isClientSide()) {
       ServerLevel serverLevel = (ServerLevel) level;
       if (this.isValid() && CustomPortalChecker.isCustomDimension(serverLevel)) {
@@ -133,11 +83,11 @@ public abstract class PortalShapeMixin implements CustomPortalChecker {
         // If it's not a Nether Portal, and we are either in the Overworld or in a Custom Dimension, check if it's a Custom Portal.
         for (ResourceKey<Level> dim : CustomPortalChecker.getCustomDimensions(serverLevel)) {
           TagKey<Block> frameBlock = CustomPortalChecker.getCustomPortalFrameBlockTag(dim);
-          bottomLeft = calculateBottomLeftForCustomDimension(pos, frameBlock);
+          bottomLeft = calculateBottomLeftForCustomDimension(blockGetter, pos, frameBlock);
           if (bottomLeft != null) {
-            setWidth(calculateWidthForCustomDimension(frameBlock));
+            setWidth(calculateWidthForCustomDimension(blockGetter, frameBlock));
             if (width > 0) {
-              height = calculateHeightForCustomDimension(frameBlock);
+              height = calculateHeightForCustomDimension(blockGetter, frameBlock);
               this.dimension = dim;
               // The first Custom Dimension to match breaks the loop and validates the Custom Portal.
               break;
@@ -154,111 +104,73 @@ public abstract class PortalShapeMixin implements CustomPortalChecker {
     }
   }
 
-  /**
-   * Copy-paste of {@link PortalShape#calculateBottomLeft(BlockPos)}, changed to use the proper frame block.
-   *
-   * @param pos block position.
-   * @param frameBlock frame block.
-   * @return bottom left corner position, {@code null} if it's not a valid Custom Portal.
-   */
   @Unique
   @Nullable
   @SuppressWarnings({"ConstantValue", "StatementWithEmptyBody"})
-  private BlockPos calculateBottomLeftForCustomDimension(BlockPos pos, TagKey<Block> frameBlock) {
-    for (int i = Math.max(level.getMinBuildHeight(), pos.getY() - 21); pos.getY() > i && isEmpty(level.getBlockState(pos.below())); pos = pos.below());
+  private BlockPos calculateBottomLeftForCustomDimension(BlockGetter blockGetter, BlockPos pos, TagKey<Block> frameBlock) {
+    for (int i = Math.max(blockGetter.getMinY(), pos.getY() - 21); pos.getY() > i && isEmpty(blockGetter.getBlockState(pos.below())); pos = pos.below());
     Direction direction = rightDir.getOpposite();
-    int j = getDistanceUntilEdgeAboveFrameForCustomDimension(frameBlock, pos, direction) - 1;
+    int j = getDistanceUntilEdgeAboveFrameForCustomDimension(blockGetter, frameBlock, pos, direction) - 1;
     return j < 0 ? null : pos.relative(direction, j);
   }
 
-  /**
-   * Copy-paste of {@link PortalShape#calculateWidth()}, changed only to use the proper frame block.
-   *
-   * @return Custom Portal width.
-   */
   @Unique
-  private int calculateWidthForCustomDimension(TagKey<Block> frameBlock) {
-    int i = getDistanceUntilEdgeAboveFrameForCustomDimension(frameBlock, bottomLeft, rightDir);
+  private int calculateWidthForCustomDimension(BlockGetter blockGetter, TagKey<Block> frameBlock) {
+    int i = getDistanceUntilEdgeAboveFrameForCustomDimension(blockGetter, frameBlock, bottomLeft, rightDir);
     return i >= 2 && i <= 21 ? i : 0;
   }
 
-  /**
-   * Copy-paste of {@link PortalShape#getDistanceUntilEdgeAboveFrame(BlockPos, Direction)}, changed only to use the proper frame block.
-   *
-   * @param frameBlock frame block.
-   * @param pos block position.
-   * @param direction portal alignment (X or Z).
-   * @return portal width.
-   */
   @Unique
   @SuppressWarnings("ConstantValue")
-  private int getDistanceUntilEdgeAboveFrameForCustomDimension(TagKey<Block> frameBlock, BlockPos pos, Direction direction) {
+  private int getDistanceUntilEdgeAboveFrameForCustomDimension(BlockGetter blockGetter, TagKey<Block> frameBlock, BlockPos pos, Direction direction) {
     BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
     for (int i = 0; i <= 21; i++) {
-      BlockState state = this.level.getBlockState(mutablePos.set(pos).move(direction, i));
+      BlockState state = blockGetter.getBlockState(mutablePos.set(pos).move(direction, i));
       if (!isEmpty(state)) {
         if (state.is(frameBlock)) {
           return i;
         }
         break;
       }
-      if (!this.level.getBlockState(mutablePos.move(Direction.DOWN)).is(frameBlock)) {
+      if (!blockGetter.getBlockState(mutablePos.move(Direction.DOWN)).is(frameBlock)) {
         break;
       }
     }
     return 0;
   }
 
-  /**
-   * Copy-paste of {@link PortalShape#calculateHeight()}, changed only to use the proper frame block.
-   *
-   * @return Custom Portal height.
-   */
   @Unique
-  private int calculateHeightForCustomDimension(TagKey<Block> frameBlock) {
+  private int calculateHeightForCustomDimension(BlockGetter blockGetter, TagKey<Block> frameBlock) {
     BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-    int i = this.getDistanceUntilTopForCustomDimension(frameBlock, pos);
-    return i >= 3 && i <= 21 && hasTopFrameForCustomDimension(frameBlock, pos, i) ? i : 0;
+    int i = this.getDistanceUntilTopForCustomDimension(blockGetter, frameBlock, pos);
+    return i >= 3 && i <= 21 && hasTopFrameForCustomDimension(blockGetter, frameBlock, pos, i) ? i : 0;
   }
 
-  /**
-   * Copy-paste of {@link PortalShape#hasTopFrame(BlockPos.MutableBlockPos, int)}, changed only to use the proper frame block.
-   *
-   * @param pos block position.
-   * @param height portal height.
-   * @return whether the portal has a top frame edge.
-   */
   @Unique
-  private boolean hasTopFrameForCustomDimension(TagKey<Block> frameBlock, BlockPos.MutableBlockPos pos, int height) {
+  private boolean hasTopFrameForCustomDimension(BlockGetter blockGetter, TagKey<Block> frameBlock, BlockPos.MutableBlockPos pos, int height) {
     for (int i = 0; i < this.width; ++i) {
       BlockPos.MutableBlockPos mutablePos = pos.set(Objects.requireNonNull(this.bottomLeft)).move(Direction.UP, height).move(this.rightDir, i);
-      if (!this.level.getBlockState(mutablePos).is(frameBlock)) {
+      if (!blockGetter.getBlockState(mutablePos).is(frameBlock)) {
         return false;
       }
     }
     return true;
   }
 
-  /**
-   * Copy-paste of {@link PortalShape#getDistanceUntilTop(BlockPos.MutableBlockPos)}, changed only to use the proper frame block.
-   *
-   * @param pos block position.
-   * @return portal height.
-   */
   @Unique
-  private int getDistanceUntilTopForCustomDimension(TagKey<Block> frameBlock, BlockPos.MutableBlockPos pos) {
+  private int getDistanceUntilTopForCustomDimension(BlockGetter blockGetter, TagKey<Block> frameBlock, BlockPos.MutableBlockPos pos) {
     for (int i = 0; i < 21; i++) {
       pos.set(Objects.requireNonNull(this.bottomLeft)).move(Direction.UP, i).move(this.rightDir, -1);
-      if (!this.level.getBlockState(pos).is(frameBlock)) {
+      if (!blockGetter.getBlockState(pos).is(frameBlock)) {
         return i;
       }
       pos.set(this.bottomLeft).move(Direction.UP, i).move(this.rightDir, this.width);
-      if (!this.level.getBlockState(pos).is(frameBlock)) {
+      if (!blockGetter.getBlockState(pos).is(frameBlock)) {
         return i;
       }
       for (int j = 0; j < this.width; ++j) {
         pos.set(this.bottomLeft).move(Direction.UP, i).move(this.rightDir, j);
-        BlockState blockstate = this.level.getBlockState(pos);
+        BlockState blockstate = blockGetter.getBlockState(pos);
         if (!isEmpty(blockstate)) {
           return i;
         }
